@@ -1,0 +1,6 @@
+To Do List for the package monoProc:
+add further monoproc-Methods to the package for other regression estimation classes
+extend the cross validation function cv to the other monoproc-classes
+extend to higher-dimensions 
+the monoproc method for loess classes is currently only implemented if the formula has only one independent variable - should be changed
+write the function mono.1d and mono.2d (the basic functions of this package) in C to make monoproc faster

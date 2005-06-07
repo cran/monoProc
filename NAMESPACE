@@ -1,0 +1,24 @@
+import("stats")
+importFrom("graphics", "plot", "persp", "contour", "image", "lines")
+export("monoproc")
+export("mono.1d")
+export("mono.2d")
+export("ksmooth")
+export("locpoly")
+export("cv")
+exportClasses("monoproc.1d")
+exportClasses("monoproc.2d")
+exportClasses("monoproclocfit.1d")
+exportClasses("monoproclocfit.2d")
+exportClasses("monofit")
+exportClasses("ksmooth")
+exportClasses("loess")
+exportClasses("locfit")
+exportClasses("monoproc")
+exportMethods(
+	"summary",
+	"plot",
+	"monoproc",
+	"lines",
+	"print"
+	)
