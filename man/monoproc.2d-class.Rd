@@ -1,9 +1,9 @@
 \name{monoproc.2d-class}
-\docType{class}
 \alias{monoproc.2d-class}
 \alias{monoproclocfit.2d-class}
 \alias{plot,monoproc.2d,missing-method}
 \alias{print,monoproc.2d-method}
+\alias{show,monoproc.2d-method}
 \alias{summary,monoproc.2d-method}
 
 \title{Class "monoproc.2d" }
@@ -36,7 +36,7 @@ Objects can be created by calls of the form \code{new("monoproc.2d", ...)}.
   }
 }
 
-\seealso{ \code{\link{monoproc.1d-class}} 
+\seealso{ \code{\link[=monoproc.1d-class]{monoproc.1d}} 
 }
 
 

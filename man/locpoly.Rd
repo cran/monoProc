@@ -18,8 +18,8 @@ an object of class \code{"locpoly"}
 
 
 
-\seealso{ for the class \code{"locpoly"} see \code{locpoly-class}. 
-For the usage, see  \code{help("locpoly", package="KernSmooth")} }
+\seealso{ for the class \code{"locpoly"} see \code{\link[=locpoly-class]{locpoly}}. 
+For the usage, see  \code{\link[KernSmooth]{locpoly}}.}
 
 
 \keyword{ regression}

@@ -459,8 +459,8 @@ if(!(class(object@fitold)=="list")){
 cat("Smooth monotone", object@mono, "fit\n")
 cat("Smoothing parameter:	", object@bandwidth,"\n")
 cat("Kernel:	", object@kernel, "\n") 
-cat("N:	",x@gridsize, "\n")
-cat("Evaluated points:	", length(x@fit@x)*length(x@fit@y),"\n")
+cat("N:	",object@gridsize, "\n")
+cat("Evaluated points:	", length(object@fit@x)*length(object@fit@y),"\n")
 cat("fitted values:\n")
 object@fit
 }
@@ -472,15 +472,15 @@ if(!(class(object@fitold)=="list")){
 	cat("Old Model:\n")
 	print(object@fitold)
 }
-if(x@dir=="xy"||x@dir=="yx") {
-cat("Smooth monotone", x@mono[1], "with respect to x and monotone", x@mono[2], "with respect to y fit\n")
-cat("Order of monotonization: ", x@dir, "\n")}
-else if(x@dir=="x") cat("Smooth monotone", x@mono[1], "with respect to x fit\n")
-else if(x@dir=="y") cat("Smooth monotone", x@mono[2], "with respect to y fit\n")
+if(object@dir=="xy"||object@dir=="yx") {
+cat("Smooth monotone", object@mono[1], "with respect to x and monotone", object@mono[2], "with respect to y fit\n")
+cat("Order of monotonization: ", object@dir, "\n")}
+else if(object@dir=="x") cat("Smooth monotone", object@mono[1], "with respect to x fit\n")
+else if(object@dir=="y") cat("Smooth monotone", object@mono[2], "with respect to y fit\n")
 cat("Smoothing parameter:	", object@bandwidth,"\n")
-cat("Kernel:	", x@kernel, "\n") 
-cat("N:	",x@gridsize, "\n")
-cat("Evaluated points:	", length(x@fit@x)*length(x@fit@y),"\n")
+cat("Kernel:	", object@kernel, "\n") 
+cat("N:	",object@gridsize, "\n")
+cat("Evaluated points:	", length(object@fit@x)*length(object@fit@y),"\n")
 cat("fitted values:\n")
 object@fit
 }
@@ -505,6 +505,24 @@ print(list(x=x@fit@x[1],y=x@fit@y[1]))
 }
 )
 
+setMethod("show",signature(object="monoproc.1d"), function(object)
+{
+if(!(class(object@fitold)=="list")){
+	cat("Old Model:\n")
+	print(object@fitold)
+
+}
+
+cat("Smooth monotone", object@mono, "fit\n")
+cat("Smoothing parameter:	", object@bandwidth,"\n")
+cat("Kernel:	", object@kernel, "\n") 
+cat("N:	",object@gridsize, "\n")
+cat("Evaluated points:	", length(object@fit@x),"\n")
+cat("the first fitted value:\n")
+print(list(x=object@fit@x[1],y=object@fit@y[1]))
+}
+)
+
 setMethod("print",signature(x="monoproc.2d"), function(x,...)
 {
 if(!(class(x@fitold)=="list")){
@@ -526,6 +544,29 @@ cat("the first fitted value:\n")
 print(list(x=x@fit@x[1],y=x@fit@y[1],z=x@fit@z[1,1]))
 }
 )
+
+setMethod("show",signature(object="monoproc.2d"), function(object)
+{
+if(!(class(object@fitold)=="list")){
+	cat("Old Model:\n")
+	print(object@fitold)
+
+}
+
+if(object@dir=="xy"||object@dir=="yx") {
+cat("Smooth monotone", object@mono[1], "with respect to x and monotone", object@mono[2], "with respect to y fit\n")
+cat("Order of monotonization: ", object@dir, "\n")}
+else if(object@dir=="x") cat("Smooth monotone", object@mono[1], "with respect to x fit\n")
+else if(object@dir=="y") cat("Smooth monotone", object@mono[2], "with respect to y fit\n")
+cat("Smoothing parameter:	", object@bandwidth,"\n")
+cat("Kernel:	", object@kernel, "\n")
+cat("N:	",object@gridsize, "\n")
+cat("Evaluated points:	", length(object@fit@x)*length(object@fit@y),"\n")
+cat("the first fitted value:\n")
+print(list(x=object@fit@x[1],y=object@fit@y[1],z=object@fit@z[1,1]))
+}
+)
+
 setMethod("cv", signature(fit="monoproc.1d"), function(fit){	
 	fitold<-fit@fitold
        data <-{ if (is.null(fitold$call$data)){ 

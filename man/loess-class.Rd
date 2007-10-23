@@ -1,5 +1,4 @@
 \name{loess-class}
-\docType{class}
 \alias{loess-class}
 
 
@@ -14,7 +13,7 @@
 
 
 \seealso{
-\code{\link[stat]{loess}}
+\code{\link[stats]{loess}}
 }
 
 \keyword{classes}

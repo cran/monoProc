@@ -7,7 +7,7 @@
 \flushbottom
 \pagestyle{empty}
 
-\title{`monoProc'- Version 1.0-4\\ Strictly monotone and smooth regression estimation in R}
+\title{`monoProc'- Version 1.0-5\\ Strictly monotone and smooth regression estimation in R}
 \author{Regine Scheder}
 
 % \VignetteIndexEntry{An R Package to monotonize a smooth function in one or two independent variables}
@@ -49,7 +49,7 @@ The monotonizing procedure applies an unconstrained nonparametric estimate of th
 It is worth mentioning that this procedure is not restricted to a nonparametric setting and can be applied in the same way in a parametric setup. Furthermore, this procedure can be used for any smooth function. An extension to multivariate regression setting is possible too.\\ 
 
 \section{S4-Classes for `ksmooth' and `locpoly'}
-To simplify the use of the function `monoproc', two functions for nonparametric regression estimation are changed to functions with S4-Class values. Basically, both function, `ksmooth' from the `stats' package and `locpoly' from `KernSmooth' package, can be used in their original form, since their values are of class `list'. The new function `ksmooth' has as value an object of class `ksmooth' containing three components the $x$- and the $y$-values of the smoothed fit and the call of this object. The function and the class `locpoly' are constructed correspondingly. In `monoProc\_1.0-4', the match.call function uses the original functions as argument that the variables can be accessed by their name. This is a first step to change these important standard functions into the S4-class system. But this means also that the existence of these two functions in the package `monoProc' are considered as temporarily to allow things like changing the gridsize in `monoproc' without fitting explicitly the unconstraint estimator again.   
+To simplify the use of the function `monoproc', two functions for nonparametric regression estimation are changed to functions with S4-Class values. Basically, both function, `ksmooth' from the `stats' package and `locpoly' from `KernSmooth' package, can be used in their original form, since their values are of class `list'. The new function `ksmooth' has as value an object of class `ksmooth' containing three components the $x$- and the $y$-values of the smoothed fit and the call of this object. The function and the class `locpoly' are constructed correspondingly. In `monoProc\_1.0-5', the match.call function uses the original functions as argument that the variables can be accessed by their name. This is a first step to change these important standard functions into the S4-class system. But this means also that the existence of these two functions in the package `monoProc' are considered as temporarily to allow things like changing the gridsize in `monoproc' without fitting explicitly the unconstrained estimator again.   
 
 
 \section{How to use `monoProc'}
@@ -57,7 +57,7 @@ To simplify the use of the function `monoproc', two functions for nonparametric 
 Some important details about the use of this R-package are introduced in this section. So far, the `monoProc'-Package contains the monotonizing function `monoproc', a cross-validation function `cv' (implementation only for monotonized `locfit'-objects), several S4-classes, and two intrinsic functions `mono.1d' and `mono.2d', basically the default functions, which are called within `monoproc'. \\
 First of all, the value of the function `monoproc' is an object of class `monoproc' with some further specification depending on the original regression fit and the dimensionality of the problem. It is distinguished between an one-dimensional and a two-dimensional regression problem (i.e. the dimension of the independent variable). For an one-dimensional problem, the function `monoproc' gives an object of class `monoproc.1d' back and in the two-dimensional case an object of class `monoproc.2d'. These two classes extend the class `monoproc' and are implemented to provide different `plot' and `summary' methods. The classes `monoproclocfit.1d' and `monoproclocfit.2d' are `monoproc'-objects which are monotonized `locfit'-objects. This two additional classes are brought in because there is a cross validation function available for these two classes. The `locfit' package provides a function to calculate the cross validation scores which is also used implicitly to evaluate the cross validation function for the monotone fit. In general, the intention is to have this cross validation function `cv' for all monotone fits, but, currently, this is only existing for `monoproclocfit.1d' and `monoproclocfit.2d', respectively.\\
  The basic formals of 'monoproc' are 'fit', 'bandwidth', 'xx', and 'dir' which define the signature of 'monoproc'. Some of them can be missing, e.g. 'dir' refers to a twodimensional problem and is therefore only needed in these cases (otherwise an error occurs). The variable 'xx' determines where the function 'monoproc' is evaluated, if missing the independent variables of 'fit' are used instead. There are three more variables, 'mono1', 'mono2', and 'gridsize'. Their default values are "increasing" for 'mono1' and 'mono2', and 40 for the gridsize (but for lists the length of the response is used). \\
-In order to illustrate the usage of `monoProc', some detailed examples are discussed. The cars data in the datasets package is often used a standard example for regression estimates. Therefore, we will apply the monotonizing procedure  to this dataset with several preliminary regression estimates. The aim is to demonstrate the features of `monoProc' not to find the best regression fit for the cars data. 
+In order to illustrate the usage of `monoProc', some detailed examples are discussed. The cars data in the datasets package is often used a standard example for regression estimates. Therefore, we will apply the monotonizing procedure  to this data set with several preliminary regression estimates. The aim is to demonstrate the features of `monoProc' not to find the best regression fit for the cars data. 
 <<results=hide,echo=FALSE>>=
 options(width=65)
 @
@@ -88,7 +88,7 @@ legend(5,100, c("isoreg","ksmooth","monoproc"),col=c(1,1,1), lty=c(3,1,2))
 \caption{A comparison with the R-function isoreg.}
 \end{center}
 \end{figure}
-The function `loess' from the `stats'-package can be used as well as a preliminary estimate in `monoproc'. To change the evaluated points in `monoproc', use the variable `xx'. In this example, the use of `monoproc' does not make sense since the loess fit is already monotone but the `goodness' of the monotone approximation with a bandwdith 0.4 and a gridsize of 30 is demonstrated.
+The function `loess' from the `stats'-package can be used as well as a preliminary estimate in `monoproc'. To change the evaluated points in `monoproc', use the variable `xx'. In this example, the use of `monoproc' does not make sense since the loess fit is already monotone but the `goodness' of the monotone approximation with a bandwidth 0.4 and a gridsize of 30 is demonstrated.
 <<>>=
 cars.lo <- loess(dist ~ speed, cars, degree=2,
 control = loess.control(surface = "direct"))
@@ -129,7 +129,7 @@ legend(5,110, c("polynomial regression","monotonized polynom"), lty=c(1,2))
 \end{center}
 \end{figure}
 
-In the next example, the usage in a two-dimensional regression problem is presented.  The Fat dataset in the package `UsingR' contains two bodyfat measures obtained by underwater weighing and several body measurements (weight, height, and body circumfence measurements). Two outliers in this dataset are removed for this analysis. Motivated by the Body Mass Index, we consider the simple regression model
+In the next example, the usage in a two-dimensional regression problem is presented.  The Fat data set in the package `UsingR' contains two body fat measures obtained by underwater weighing and several body measurements (weight, height, and body circumfence measurements). Two outliers in this data set are removed for this analysis. Motivated by the Body Mass Index, we consider the simple regression model
 $$Y=m(X_1,X_2)+ \epsilon,$$
 where 
 \begin{eqnarray*}Y&=&\mbox{body.fat.siri (\%),}\\
@@ -153,11 +153,11 @@ With the variable `dir', the direction, the order of the monotonization, and the
 \begin{figure}[h]
 \setkeys{Gin}{width=0.5\textwidth}     
 <<d,fig=TRUE, echo=FALSE, width=7.5, height=7.5>>=
-plot(fit, type="persp", theta = 300, phi = 30,col="lightblue", cex=1.3, main="unconstraint Bodyfat estimate")
+plot(fit, type="persp", theta = 300, phi = 30,col="lightblue", cex=1.3, main="unconstrained Bodyfat estimate")
 @
 \setkeys{Gin}{width=0.5\textwidth} 
 <<e,fig=TRUE, echo=FALSE, width=6, height=6>>=
-plot(fit, main="contour plot of the unconstraint estimate")
+plot(fit, main="contour plot of the unconstrained estimate")
 @
 \setkeys{Gin}{width=0.5\textwidth} 
 <<f,fig=TRUE, echo=FALSE, width=7.5, height=7.5>>=
@@ -167,12 +167,12 @@ plot(fitmono,theta = 300, phi = 30, col="lightblue",cex=1.3, main="monotone Body
 <<g,fig=TRUE, echo=FALSE, width=6, height=6>>=
 plot(fitmono, type="contour", main="contour plot of the monotone estimate")
 @
-\caption{Bodyfat example: perspective and contour plots. Upper panel: the unconstraint regression estimate. Lower panel: the monotone estimate.}
+\caption{Bodyfat example: perspective and contour plots. Upper panel: the unconstrained regression estimate. Lower panel: the monotone estimate.}
 \end{figure}
 
-To compare the unconstraint and the monotized fit with each other, a cross validation function `cv' for monotonized `locfit'-objects is implemented. One-leave-out Cross Valdiation is used, i.e.
+To compare the unconstrained and the monotized fit with each other, a cross validation function `cv' for monotonized `locfit'-objects is implemented. One-leave-out Cross Valdiation is used, i.e.
 $$CV=\frac{1}{n}\sum_{i=1}^n(Y_i-\hat{m}_{I,i}(X_i))^2$$
-where $\hat{m}_{I,i}(X_i)$ corresponds to the estimated value for $Y_i$ after monotonization where the observation $(X_i,Y_i)$ is left out. The value of the function `cv' is a matrix containing the values $\hat{m}_{I,i}(X_i)$ [the monotone estimate] in the first column and $\hat{m}(X_i)$ [the unconstrained estimate] in the second column. So applied to the Bodyfat-example, we obtain for the unconstraint estimator   
+where $\hat{m}_{I,i}(X_i)$ corresponds to the estimated value for $Y_i$ after monotonization where the observation $(X_i,Y_i)$ is left out. The value of the function `cv' is a matrix containing the values $\hat{m}_{I,i}(X_i)$ [the monotone estimate] in the first column and $\hat{m}(X_i)$ [the unconstrained estimate] in the second column. So applied to the Bodyfat-example, we obtain for the unconstrained estimator   
 <<>>=
 t<-cv(fitmono)
 sum((t[,2]-body.fat.siri)^2)/250    
@@ -218,7 +218,7 @@ contour(x,y,z, main="contour plot f(x,y)")
 <<k,fig=TRUE, echo=FALSE, width=6, height=6>>=
 plot(mono,type="contour", main="contour plot monotone f(x,y)")
 @
-\caption{Monotonizing with respect to a single variable in a twodimensional problem.}
+\caption{Monotonizing with respect to a single variable in a two-dimensional problem.}
 \end{figure}
 In Figure 6, two-dimensional plots are presented to show how the monotonizing procedure works. The commands for Figure 6 might be interesting to see how the fitted values can be accessed. Therefore all commands for the given figures can be found in the Appendix.    
 \begin{figure}[h]
@@ -251,8 +251,8 @@ slotNames("monoproc.2d")
 The classes `monoproc' and `monoproc.1d' are basically the same. In the class `monoproc.2d', the slot `dir' is attached. The names for the slots are chosen self-explanatory and the slot `call' can be easily used for further manipulations.
 
 \section{Problems to solve in the future}
-At the moment, especially the Cross-Validation function `cv' might be computationally not efficient since for a two-dimensional problem this function calls another R function in which, furthermore, a C-Programm is called. But the general issue of this Package or of the function `monoproc' is related to the fact that it should be able to be used with any smooth function coming from anywhere (i.e. `locfit', `ksmooth', or `locpoly'). This is a real problem or challenge since all this `objects' have very different properties, e.g. the slots for the fitted values have different name or are only available after calling another function to evaluate or to predict. This makes the function `monoproc' a bit messy. For this reason, the functions `mono.1d' and `mono.2d' are used to do the actual monotonization. Both functions have basically a list containing the independent variables (maximal two independent variables) and the response (same length as the variables) as argument. The length of the elements of this list determines the integral approximation described in section 2 where $N$ corresponds to the length of the response. With this functions and also with the method `monoproc' for `list', it is easily possible to extend this monotonizing procedure to other objects. Further work might be therefore focused on the extension of `monoproc' to other classes as arguments. Another emphasis is to make the cross validation function `cv' available for all `monoproc'-objects. \\
-In 'monoProc\_1.0-4', the signature of the function 'monoproc' contains the variables 'fit', 'bandwidth', 'xx', and 'dir'. This allows to match the method 'monoproc' in a more direct way (avoids some if-statements). Missing values for the bandwidth of the 'monoproc' function are not accepted. In this case, 'monoproc' gives the message:
+At the moment, especially the Cross-Validation function `cv' might be computationally not efficient since for a two-dimensional problem this function calls another R function in which, furthermore, a C program is called. But the general issue of this Package or of the function `monoproc' is related to the fact that it should be able to be used with any smooth function coming from anywhere (i.e. `locfit', `ksmooth', or `locpoly'). This is a real problem or challenge since all this `objects' have very different properties, e.g. the slots for the fitted values have different name or are only available after calling another function to evaluate or to predict. This makes the function `monoproc' a bit messy. For this reason, the functions `mono.1d' and `mono.2d' are used to do the actual monotonization. Both functions have basically a list containing the independent variables (maximal two independent variables) and the response (same length as the variables) as argument. The length of the elements of this list determines the integral approximation described in section 2 where $N$ corresponds to the length of the response. With this functions and also with the method `monoproc' for `list', it is easily possible to extend this monotonizing procedure to other objects. Further work might be therefore focused on the extension of `monoproc' to other classes as arguments. Another emphasis is to make the cross validation function `cv' available for all `monoproc'-objects. \\
+In 'monoProc\_1.0-5', the signature of the function 'monoproc' contains the variables 'fit', 'bandwidth', 'xx', and 'dir'. This allows to match the method 'monoproc' in a more direct way (avoids some if-statements). Missing values for the bandwidth of the 'monoproc' function are not accepted. In this case, 'monoproc' gives the message:
 <<>>=
 monoproc(fit)
 @

@@ -15,7 +15,7 @@ ksmooth(...)
   an object of class \code{"ksmooth"}.
 }
 
-\seealso{for the class \code{"ksmooth"} see \code{\link{ksmooth-class}}. For details of the usage, please see \code{help("ksmooth", package="stats")}}
+\seealso{for the class \code{"ksmooth"} see \code{\link[=ksmooth-class]{ksmooth}}. For details of the usage, please see \code{\link[stats]{ksmooth}}.}
 
 \keyword{regression}
 \keyword{smooth }

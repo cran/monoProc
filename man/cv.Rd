@@ -32,7 +32,7 @@ if(require(UsingR)&&require(locfit)){
 	attach(fat)
 	x<-as.matrix(cbind(weight, height))
 	fit<-locfit.raw(x,body.fat.siri, alpha=0.3, deg=1, kern="epan")
-	fitmono<-monoproc(fit,bandwidth=1,dir="xy", gridsize=30)
+	fitmono<-monoproc(fit,bandwidth=1,mono1="increasing", mono2="decreasing", dir="xy", gridsize=30)
 	nf<- layout(matrix(c(1,1,1,2,2,3,3,3,4,4), 2, 5, byrow = TRUE))
 	layout.show(nf)
 	plot(fit, type="persp", theta = 135, phi = 30,col="lightblue",

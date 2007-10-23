@@ -1,5 +1,4 @@
 \name{monoproc-class}
-\docType{class}
 \alias{monoproc-class}
 
 \title{Class "monoproc" }
@@ -22,7 +21,7 @@ Objects can be created by calls of the form \code{new("monoproc", ...)}.
 }
 
 
-\details{ For further details please see also \code{\link{monoproc.1d-class}} and \code{\link{monoproc.2d-class} }}
+\details{ For further details please see also \code{\link[=monoproc.1d-class]{monoproc.1d}} and \code{\link[=monoproc.2d-class]{monoproc.2d} }}
 
 
 \keyword{classes}

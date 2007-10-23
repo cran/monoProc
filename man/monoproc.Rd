@@ -49,7 +49,7 @@ Dette, H. and Scheder, R. (2005) \emph{Striclty monotone and smooth nonparametri
 
 \author{ Regine Scheder \email{Regine.Scheder@rub.de}}
 
-\seealso{ \code{\link{monoproc.1d-class}} and \code{\link{monoproc.2d-class}} }
+\seealso{ \code{\link[=monoproc.1d-class]{monoproc.1d}} and \code{\link[=monoproc.2d-class]{monoproc.2d}} }
 \examples{
 #Spencer's Mortality Dataset
 if(require(locfit)){
@@ -68,7 +68,7 @@ fat<-fat[-39,] ##two extreme observations
 fat<-fat[-41,] ##are deleted
 attach(fat)
 fit<-locfit.raw(cbind(weight, height),body.fat.siri, alpha=0.3, deg=1, kern="epan")
-fitmono<-monoproc(fit,bandwidth=1,dir="xy", gridsize=30)
+fitmono<-monoproc(fit,bandwidth=1, mono1= "increasing", mono2="decreasing", dir="xy", gridsize=30)
 nf<- layout(matrix(c(1,1,1,2,2,3,3,3,4,4), 2, 5, byrow = TRUE))
 layout.show(nf)
 plot(fit, type="persp", theta = 135, phi = 30,col="lightblue",

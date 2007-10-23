@@ -1,5 +1,4 @@
 \name{locpoly-class}
-\docType{class}
 \alias{locpoly-class}
 \alias{lines,locpoly-method}
 \alias{plot,locpoly,missing-method}

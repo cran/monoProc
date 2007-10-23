@@ -1,5 +1,4 @@
 \name{ksmooth-class}
-\docType{class}
 \alias{ksmooth-class}
 \alias{lines,ksmooth-method}
 \alias{plot,ksmooth,missing-method}

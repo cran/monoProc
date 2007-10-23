@@ -20,5 +20,6 @@ exportMethods(
 	"plot",
 	"monoproc",
 	"lines",
-	"print"
+	"print",
+	"show"
 	)

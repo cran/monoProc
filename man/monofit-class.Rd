@@ -1,5 +1,4 @@
 \name{monofit-class}
-\docType{class}
 \alias{monofit-class}
 \alias{lines,monofit-method}
 \alias{plot,monofit,missing-method}
@@ -27,7 +26,7 @@ Objects can be created by calls of the form \code{new("monofit", ...)}.
 }
 
 \seealso{
-  \code{\link{mono.1d}}, \code{\link{mono.2d}} ,\code{\link{monoproc.1d-class}} , or \code{\link{monoproc.2d-class}}
+  \code{\link{mono.1d}}, \code{\link{mono.2d}} ,\code{\link[=monoproc.1d-class]{monoproc.1d}} , or \code{\link[=monoproc.2d-class]{monoproc.2d}}
 }
 
 \keyword{classes}
